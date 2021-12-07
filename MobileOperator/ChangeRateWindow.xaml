@@ -1,0 +1,69 @@
+﻿<Window x:Class="MobileOperator.ChangeRateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="'http://materialdesignxaml.net/winfx/xaml/themes"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:ii="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ie="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:y="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:MobileOperator"
+        mc:Ignorable="d"
+        Title="Мобильный оператор" Height="700" Width="900">
+    <Grid Background="#FFF8DC" Margin="0,0,-6.4,-135.6" Height="700" VerticalAlignment="Top">
+
+        <TextBlock HorizontalAlignment="Stretch" Foreground="White" FontWeight="Bold" Background="#A52A2A" Text="Смена тарифа" VerticalAlignment="Top" Height="58" TextAlignment="Center" FontSize="40" />
+        <Grid Margin=" 0, 59, 0, 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button Command="{Binding OpenMainWindow}" Content="Мой кабинет" FontSize="20" HorizontalAlignment="Stretch" Background="#FFF8DC" Foreground="Black" VerticalAlignment="Top" Height="40" Grid.Column="0"/>
+            <Button Command="{Binding OpenServices}" Content="Услуги" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="1"/>
+            <Button Command="{Binding OpenRates}" Content="Тарифы"  FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="2"/>
+            <Button Command="{Binding OpenDetailing}" Content="Детализация" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="3"/>
+        </Grid>
+        <TextBlock HorizontalAlignment="Stretch" TextAlignment="Center" Margin="0,100,0,0" FontSize="30" FontWeight="Bold" Height="50" VerticalAlignment="Top">Список тарифов:</TextBlock>
+
+        <Border Margin="20,150,20,20" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" CornerRadius="20">
+            <ListBox  x:Name="ListRates" ItemsSource="{Binding Rates}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel  Margin="10">
+                            <TextBlock FontSize="30" Foreground="#A52A2A" TextAlignment="Left" Text="{Binding Path=Name}" Height="40" Margin="20 0 0 0"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="6*"/>
+                                    <ColumnDefinition Width="5*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock FontSize="18"><Run Text="Интернет: "/> <Run Text="{Binding Path=GB}"/><Run Text=" ГБ."/></TextBlock>
+                                    <TextBlock FontSize="18"><Run Text="Минуты: "/><Run Text="{Binding Path=Minutes}"/><Run Text=" мин."/></TextBlock>
+                                    <TextBlock FontSize="18"><Run Text="СМС: "/><Run Text="{Binding Path=SMS}"/><Run Text=" шт."/></TextBlock>
+                                    <TextBlock FontSize="18"><Run Text="СМС (вне пакета): "/><Run Text="{Binding Path=SMSCost}"/><Run Text=" ₽"/></TextBlock>
+                                    <TextBlock FontSize="18"><Run Text="Ежемесячное списание: "/><Run Text="{Binding Path=Cost}"/><Run Text=" ₽"/></TextBlock>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock FontSize="18"><Run Text="Минута по городу: "/><Run Text="{Binding Path=CityCost}"/><Run Text=" ₽"/></TextBlock>
+                                    <TextBlock FontSize="18"><Run Text="Минута по межгороду: "/><Run Text="{Binding Path=IntercityCost}"/><Run Text=" ₽"/></TextBlock>
+                                    <TextBlock FontSize="18"><Run Text="Международная минута: "/><Run Text="{Binding Path=InternationalCost}"/><Run Text=" ₽"/></TextBlock>
+                                    <TextBlock FontSize="18"><Run Text="ГБ (вне пакета): "/><Run Text="{Binding Path=GBCost}"/><Run Text=" ₽"/></TextBlock>
+                                    <TextBlock FontSize="18"><Run Text="Стоимость перехода: "/><Run Text="{Binding Path=ConnectionCost}"/><Run Text=" ₽"/></TextBlock>
+                                </StackPanel>
+                                <StackPanel VerticalAlignment="Center" Grid.Column="2">
+                                    <Button Command="{Binding ChangeRateCommand}" CommandParameter="{Binding Path=Id}" Foreground="White" Background="#A52A2A" FontSize="15" Width="150" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock TextAlignment="Center" TextWrapping="Wrap">Перейти на этот тариф!</TextBlock>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+    </Grid>
+</Window>
