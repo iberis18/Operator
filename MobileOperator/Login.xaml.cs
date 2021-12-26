@@ -23,7 +23,7 @@ namespace MobileOperator
         public Login()
         {
             InitializeComponent();
-            DataContext = new LoginWindowViewModel();
+            DataContext = new LoginWindowViewModel(this);
         }
     }
 }

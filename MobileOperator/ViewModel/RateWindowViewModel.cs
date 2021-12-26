@@ -7,6 +7,7 @@ using MobileOperator.Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace MobileOperator.ViewModel
 {
@@ -16,12 +17,14 @@ namespace MobileOperator.ViewModel
         private RateModel rate;
         private ClientModel client;
         private RateListModel allRates = new RateListModel();
+        Window window;
         public ObservableCollection<RateModel> Rates { get; set; }
 
-        public RateWindowViewModel(int userId, int status)
+        public RateWindowViewModel(int userId, int status, Window window)
         {
             this.userId = userId;
             this.status = status;
+            this.window = window;
             Rates = new ObservableCollection<RateModel> { };
             if (status == 2)
                 foreach (RateModel rate in allRates.AllCorporateRates)
@@ -141,8 +144,14 @@ namespace MobileOperator.ViewModel
 
                       if (selectRate != null)
                       {
-                          ViewRateWindow rate = new ViewRateWindow(userId, selectRate.Id);
+                          SelectesRateWindow rate = new SelectesRateWindow(userId, selectRate.Id);
+                          rate.WindowState = window.WindowState;
+                          rate.Top = window.Top;
+                          rate.Left = window.Left;
+                          rate.Height = window.Height;
+                          rate.Width = window.Width;
                           rate.Show();
+                          window.Close();
                       }
                   }));
             }
@@ -157,7 +166,13 @@ namespace MobileOperator.ViewModel
                   (changeRateCommand = new RelayCommand(obj =>
                   {
                       ChangeRateWindow changeRate = new ChangeRateWindow(userId);
+                      changeRate.WindowState = window.WindowState;
+                      changeRate.Top = window.Top;
+                      changeRate.Left = window.Left;
+                      changeRate.Height = window.Height;
+                      changeRate.Width = window.Width;
                       changeRate.Show();
+                      window.Close();
                   }));
             }
         }
@@ -171,7 +186,13 @@ namespace MobileOperator.ViewModel
                   (openMainWindow = new RelayCommand(obj =>
                   {
                       MainWindow main = new MainWindow(userId, status);
+                      main.WindowState = window.WindowState;
+                      main.Top = window.Top;
+                      main.Left = window.Left;
+                      main.Height = window.Height;
+                      main.Width = window.Width;
                       main.Show();
+                      window.Close();
                   }));
             }
         }
@@ -184,7 +205,51 @@ namespace MobileOperator.ViewModel
                   (openServices = new RelayCommand(obj =>
                   {
                       ServicesWindow services = new ServicesWindow(userId, status);
+                      services.WindowState = window.WindowState;
+                      services.Top = window.Top;
+                      services.Left = window.Left;
+                      services.Height = window.Height;
+                      services.Width = window.Width;
                       services.Show();
+                      window.Close();
+                  }));
+            }
+        }
+        private RelayCommand openDetailing;
+        public RelayCommand OpenDetailing
+        {
+            get
+            {
+                return openDetailing ??
+                  (openDetailing = new RelayCommand(obj =>
+                  {
+                      DetailingWindow detailing = new DetailingWindow(userId, status);
+                      detailing.WindowState = window.WindowState;
+                      detailing.Top = window.Top;
+                      detailing.Left = window.Left;
+                      detailing.Height = window.Height;
+                      detailing.Width = window.Width;
+                      detailing.Show();
+                      window.Close();
+                  }));
+            }
+        }
+        private RelayCommand openDetailing2;
+        public RelayCommand OpenDetailing2
+        {
+            get
+            {
+                return openDetailing2 ??
+                  (openDetailing2 = new RelayCommand(obj =>
+                  {
+                      DetailingWindow2 detailing = new DetailingWindow2(userId, status);
+                      detailing.WindowState = window.WindowState;
+                      detailing.Top = window.Top;
+                      detailing.Left = window.Left;
+                      detailing.Height = window.Height;
+                      detailing.Width = window.Width;
+                      detailing.Show();
+                      window.Close();
                   }));
             }
         }

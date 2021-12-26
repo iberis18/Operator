@@ -16,11 +16,14 @@ namespace MobileOperator.ViewModel
         private int rateId, userId;
         private RateModel rate;
         private ClientModel client;
-        public ViewRateWindowViewModel(int userId, int rateId)
+        Window window;
+        public ViewRateWindowViewModel(int userId, int rateId, Window window)
         {
             this.rateId = rateId;
             this.userId = userId;
+            this.window = window;
             rate = new RateModel(rateId);
+            client = new ClientModel(userId);
         }
         public String Rate
         {
@@ -86,12 +89,6 @@ namespace MobileOperator.ViewModel
                 return changeRateCommand ??
                   (changeRateCommand = new RelayCommand(obj =>
                   {
-                      client = new ClientModel(userId);
-                      //if (client.Status == 2)
-                      //    client = new ULModel(userId);
-                      //else
-                      //    client = new FLModel(userId);
-
                       if (client.Rate == rateId)
                           MessageBox.Show("Вы уже подключены к данному тарифу!");
                       else
@@ -108,6 +105,102 @@ namespace MobileOperator.ViewModel
                                   MessageBox.Show("Произошла ошибка, попроюуйте еще раз!");
                           }
                       }
+                  }));
+            }
+        }
+
+        private RelayCommand openMainWindow;
+        public RelayCommand OpenMainWindow
+        {
+            get
+            {
+                return openMainWindow ??
+                  (openMainWindow = new RelayCommand(obj =>
+                  {
+                      MainWindow main = new MainWindow(userId, client.Status);
+                      main.WindowState = window.WindowState;
+                      main.Top = window.Top;
+                      main.Left = window.Left;
+                      main.Height = window.Height;
+                      main.Width = window.Width;
+                      main.Show();
+                      window.Close();
+                  }));
+            }
+        }
+        private RelayCommand openRates;
+        public RelayCommand OpenRates
+        {
+            get
+            {
+                return openRates ??
+                  (openRates = new RelayCommand(obj =>
+                  {
+                      RatesWindow rates = new RatesWindow(userId, client.Status);
+                      rates.WindowState = window.WindowState;
+                      rates.Top = window.Top;
+                      rates.Left = window.Left;
+                      rates.Height = window.Height;
+                      rates.Width = window.Width;
+                      rates.Show();
+                      window.Close();
+                  }));
+            }
+        }
+        private RelayCommand openServices;
+        public RelayCommand OpenServices
+        {
+            get
+            {
+                return openServices ??
+                  (openServices = new RelayCommand(obj =>
+                  {
+                      ServicesWindow services = new ServicesWindow(userId, client.Status);
+                      services.WindowState = window.WindowState;
+                      services.Top = window.Top;
+                      services.Left = window.Left;
+                      services.Height = window.Height;
+                      services.Width = window.Width;
+                      services.Show();
+                      window.Close();
+                  }));
+            }
+        }
+        private RelayCommand openDetailing;
+        public RelayCommand OpenDetailing
+        {
+            get
+            {
+                return openDetailing ??
+                  (openDetailing = new RelayCommand(obj =>
+                  {
+                      DetailingWindow detailing = new DetailingWindow(userId, client.Status);
+                      detailing.WindowState = window.WindowState;
+                      detailing.Top = window.Top;
+                      detailing.Left = window.Left;
+                      detailing.Height = window.Height;
+                      detailing.Width = window.Width;
+                      detailing.Show();
+                      window.Close();
+                  }));
+            }
+        }
+        private RelayCommand openDetailing2;
+        public RelayCommand OpenDetailing2
+        {
+            get
+            {
+                return openDetailing2 ??
+                  (openDetailing2 = new RelayCommand(obj =>
+                  {
+                      DetailingWindow2 detailing = new DetailingWindow2(userId, client.Status);
+                      detailing.WindowState = window.WindowState;
+                      detailing.Top = window.Top;
+                      detailing.Left = window.Left;
+                      detailing.Height = window.Height;
+                      detailing.Width = window.Width;
+                      detailing.Show();
+                      window.Close();
                   }));
             }
         }

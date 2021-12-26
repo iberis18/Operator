@@ -16,13 +16,15 @@ namespace MobileOperator.ViewModel
         private int userId, status;
         private ClientModel client;
         private RateModel rate;
+        private Window window;
         private ServiceListModel allServices = new ServiceListModel();
         public ObservableCollection<ServiceModel> Services { get; set; }
 
-        public AppViewModel(int userId, int status)
+        public AppViewModel(int userId, int status, Window window)
         {
             this.userId = userId;
             this.status = status;
+            this.window = window;
             if (status == 2)
                 client = new ULModel(userId);
             else
@@ -113,7 +115,13 @@ namespace MobileOperator.ViewModel
                   (openRates = new RelayCommand(obj =>
                   {
                       RatesWindow rates = new RatesWindow(userId, status);
+                      rates.WindowState = window.WindowState;
+                      rates.Top = window.Top;
+                      rates.Left = window.Left;
+                      rates.Height = window.Height;
+                      rates.Width = window.Width;
                       rates.Show();
+                      window.Close();
                   }));
             }
         }
@@ -126,7 +134,66 @@ namespace MobileOperator.ViewModel
                   (openServices = new RelayCommand(obj =>
                   {
                       ServicesWindow services = new ServicesWindow(userId, status);
+                      services.WindowState = window.WindowState;
+                      services.Top = window.Top;
+                      services.Left = window.Left;
+                      services.Height = window.Height;
+                      services.Width = window.Width;
                       services.Show();
+                      window.Close();
+                  }));
+            }
+        }
+        private RelayCommand openDetailing;
+        public RelayCommand OpenDetailing
+        {
+            get
+            {
+                return openDetailing ??
+                  (openDetailing = new RelayCommand(obj =>
+                  {
+                      DetailingWindow detailing = new DetailingWindow(userId, status);
+                      detailing.WindowState = window.WindowState;
+                      detailing.Top = window.Top;
+                      detailing.Left = window.Left;
+                      detailing.Height = window.Height;
+                      detailing.Width = window.Width;
+                      detailing.Show();
+                      window.Close();
+                  }));
+            }
+        }
+        private RelayCommand openDetailing2;
+        public RelayCommand OpenDetailing2
+        {
+            get
+            {
+                return openDetailing2 ??
+                  (openDetailing2 = new RelayCommand(obj =>
+                  {
+                      DetailingWindow2 detailing = new DetailingWindow2(userId, status);
+                      detailing.WindowState = window.WindowState;
+                      detailing.Top = window.Top;
+                      detailing.Left = window.Left;
+                      detailing.Height = window.Height;
+                      detailing.Width = window.Width;
+                      detailing.Show();
+                      window.Close();
+                  }));
+            }
+        }
+
+        private RelayCommand logOutCommand;
+        public RelayCommand LogOutCommand
+        {
+            get
+            {
+                return logOutCommand ??
+                  (logOutCommand = new RelayCommand(obj =>
+                  {
+                      Login login = new Login();
+                      login.Show();
+                      window.Close();
                   }));
             }
         }

@@ -13,6 +13,9 @@ namespace DAL
 
         public int callerId { get; set; }
 
+        [StringLength(11)]
+        public string callerNumber { get; set; }
+
         public int? calledId { get; set; }
 
         [StringLength(11)]
@@ -20,9 +23,11 @@ namespace DAL
 
         public DateTime time { get; set; }
 
-        public int duration { get; set; }
+        public TimeSpan duration { get; set; }
 
         public int typeId { get; set; }
+
+        public decimal cost { get; set; }
 
         public virtual Client Client { get; set; }
 

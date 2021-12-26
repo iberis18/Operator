@@ -1,0 +1,98 @@
+﻿<Window x:Class="MobileOperator.DetailingWindow2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MobileOperator"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Мобильный оператор" Height="688.4" Width="900">
+    <Grid Background="#FFF8DC" Margin="0,0,-6.4,0.4">
+        <TextBlock HorizontalAlignment="Stretch" Foreground="White" FontWeight="Bold" Background="#A52A2A" Text="Детализация" VerticalAlignment="Top" Height="58" TextAlignment="Center" FontSize="40" >
+        </TextBlock>
+        <Grid Margin=" 0, 59, 0, 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button Command="{Binding OpenMainWindow}" Content="Мой кабинет" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="0"/>
+            <Button Command="{Binding OpenServices}" Content="Услуги" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="1"/>
+            <Button Command="{Binding OpenRates}" Content="Тарифы" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="2"/>
+            <Button Command="{Binding OpenDetailing}" Content="Отчет 1" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="3"/>
+            <Button Content="Отчет 2" FontSize="20" Background="White" Foreground="#A52A2A" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="4"/>
+        </Grid>
+
+        <Grid Margin="10,120,10,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="38"/>
+            </Grid.RowDefinitions>
+            <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Top" TextAlignment="Center" FontSize="30" Text="Получите историю тарифов и услуг за выбраный период" Grid.Row="0"/>
+            <Border Padding="20" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" CornerRadius="20" Grid.Row="1">
+                <StackPanel VerticalAlignment="Center">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1.2*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Top" TextAlignment="Right" FontSize="20" Text="Укажите период:    c   " Grid.Column="0"/>
+                        <DatePicker SelectedDate="{Binding Path=From}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="150"/>
+                        <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Top" TextAlignment="Center" FontSize="20" Text="по" Grid.Column="2"/>
+                        <DatePicker SelectedDate="{Binding Path=Till}" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Top" Width="150"/>
+                        <Button Command="{Binding GetDetailingCommand}" Foreground="White" Background="#A52A2A" FontSize="15" Height="34" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Cформировать выписку" Grid.Column="4"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+
+            <Grid  Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Top" TextAlignment="Center" FontSize="20" Text="Тарифы" Grid.Row="0"/>
+                <DataGrid x:Name="DetailingRatesDataGrid" FontSize="18" CanUserAddRows="False" Margin="0 30 5 0"
+                              ItemsSource="{Binding Rates}"  Grid.Column="0"
+                              AutoGenerateColumns="False" ColumnWidth="*"
+                              HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Foreground="#A52A2A" Header="Наименование" Binding="{Binding RateName}" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Дата подключения" Binding="{Binding FromDateToString, StringFormat=G}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Дата отключения" Binding="{Binding TillDateToString, StringFormat=G}" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Top" TextAlignment="Center" FontSize="20" Text="Услуги" Grid.Column="1"/>
+                <DataGrid x:Name="DetailingServicesDataGrid" FontSize="18" CanUserAddRows="False" Margin="5 30 0 0"
+                              ItemsSource="{Binding Services}"  Grid.Column="1"
+                              AutoGenerateColumns="False" ColumnWidth="*"
+                              HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Foreground="#A52A2A" Header="Наименование" Binding="{Binding ServiceName}" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Дата подключения" Binding="{Binding FromDateToString, StringFormat=G}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Дата отключения" Binding="{Binding TillDateToString, StringFormat=G}" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Grid>
+
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Button Command="{Binding PrintToExelDetailingCommand}" Foreground="White" Background="#A52A2A" FontSize="15" Height="34" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Скачать выписку в xlsx" Grid.Column="0" />
+                <Button Command="{Binding PrintToWordDetailingCommand}" Foreground="White" Background="#A52A2A" FontSize="15" Height="34" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Скачать выписку в doc" Grid.Column="1" />
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

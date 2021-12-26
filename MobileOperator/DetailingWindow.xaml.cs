@@ -24,7 +24,7 @@ namespace MobileOperator
         public DetailingWindow(int userId, int status)
         {
             InitializeComponent();
-            DataContext = new DetailingWindowViewModel(userId, status);
+            DataContext = new DetailingWindowViewModel(userId, status, this);
         }
     }
 }

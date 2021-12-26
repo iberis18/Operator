@@ -20,10 +20,11 @@ namespace MobileOperator
     /// </summary>
     public partial class RatesWindow : Window
     {
+
         public RatesWindow(int userId, int status)
         {
             InitializeComponent();
-            DataContext = new RateWindowViewModel(userId, status);
+            DataContext = new RateWindowViewModel(userId, status, this);
         }
     }
 }

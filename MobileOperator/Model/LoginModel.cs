@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using DAL;
+using System.Windows;
 
 namespace MobileOperator.Model
 {
@@ -22,34 +23,43 @@ namespace MobileOperator.Model
         {
             get
             { return status; }
-            set
-            {
-                status = value;
-            }
+            set { status = value; }
         }
         public int Id
         {
             get { return id; }
-            set
-            {
-                id = value;
-            }
+            set { id = value; }
         }
 
         public string Password
         {
             get { return password; }
-            set
-            {
-                password = value;
-            }
+            set { password = value; }
         }
         public string Login
         {
             get { return login; }
-            set
+            set { login = value; }
+        }
+
+        private void DBException()
+        {
+            MessageBox.Show("Ошибка подключения к базе, приложение будет закрыто", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+            Environment.Exit(0);
+        }
+
+        private void checkDB(DAL.MobileOperator db)
+        {
+            try
             {
-                login = value;
+                if (!db.Database.Exists())
+                {
+                    DBException();
+                }
+            }
+            catch (System.InvalidOperationException)
+            {
+                DBException();
             }
         }
 

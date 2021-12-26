@@ -8,10 +8,10 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="Мобильный оператор" Height="800" Width="900">
     <Grid Background="#FFF8DC" Margin="0,0,-6.4,0.4">
-        <TextBlock HorizontalAlignment="Stretch" Foreground="White" FontWeight="Bold" Background="#A52A2A" Text="Тарифы" VerticalAlignment="Top" Height="58" TextAlignment="Center" FontSize="40" >
-        </TextBlock>
+        <TextBlock HorizontalAlignment="Stretch" Foreground="White" FontWeight="Bold" Background="#A52A2A" Text="Мобильный оператор"  VerticalAlignment="Top" Height="58" TextAlignment="Center" FontSize="40" />
         <Grid Margin=" 0, 59, 0, 0">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
@@ -20,10 +20,12 @@
             <Button Content="Мой кабинет" FontSize="20" Background="White" Foreground="#A52A2A" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="0"/>
             <Button Command="{Binding OpenServices}" Content="Услуги" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="1"/>
             <Button Command="{Binding OpenRates}" Content="Тарифы" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="2"/>
-            <Button Command="{Binding OpenDetailing}" Content="Детализация" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="3"/>
+            <Button Command="{Binding OpenDetailing}" Content="Отчет" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="3"/>
+            <Button Command="{Binding OpenDetailing2}" Content="Отчет 2" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="4"/>
         </Grid>
         <Grid Margin="10,100,10,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="50">
-            <TextBlock Background="White" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="20" Margin="0 0 20 0" Padding="2"><Run Foreground="#A52A2A" Text="Авторизация: "/><Run Text="{Binding Path=ClientName}"/><Run Text=" — тел. "/><Run Text="{Binding Path=ClientNumber}"/></TextBlock>
+            <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25 0 0 0" FontSize="20" Padding="2"><Run Foreground="#A52A2A" Text="Авторизация: "/><Run Text="{Binding Path=ClientName}"/><Run Text=" — тел. "/><Run Text="{Binding Path=ClientNumber}"/></TextBlock>
+            <Button Command="{Binding LogOutCommand}" Foreground="White" Background="#A52A2A" FontSize="16" Width="150" Height="36" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 20 0">Выйти</Button>
         </Grid>
         <Grid  Margin="10,150,10,0">
             <Grid.ColumnDefinitions>
@@ -59,7 +61,7 @@
                         <TextBlock Text="Пополнить:" VerticalAlignment="Bottom" FontSize="20" Grid.Column="0" />
                         <TextBox Text="{Binding Amount}"  FontSize="20" Grid.Column="1"/>
                         <TextBlock FontSize="20" VerticalAlignment="Bottom" Text=" ₽" Grid.Column="2"/>
-                        <Button Command="{Binding PayCommand}" Foreground="White" Background="#A52A2A" FontSize="15" Height="36" VerticalAlignment="Top" Grid.Column="3">Оплатить</Button>
+                        <Button Command="{Binding PayCommand}" Foreground="White" Background="#A52A2A" FontSize="16" Height="36" VerticalAlignment="Top" Grid.Column="3">Оплатить</Button>
                     </Grid>
                 </StackPanel>
             </Border>
@@ -82,14 +84,13 @@
             <Border Background="White" VerticalAlignment="Top" Padding="30" CornerRadius="20" Margin="15, 10, 20, 20" Grid.Row="1" Grid.Column="1">
                 <StackPanel>
                     <TextBlock TextAlignment="Center" Margin="10,0,10.8,0" Height="43"><Run  FontSize="30" Text="Осталось:"/></TextBlock>
-                    <TextBlock FontSize="20" Height="56" Margin="10,0,10.4,0"><Run FontSize="20" Text="Интернет                       "/> <Run FontSize="35" Text="{Binding Path=GB}"/><Run FontSize="35" Text=" ГБ"/></TextBlock>
-                    <TextBlock FontSize="20" Height="56" Margin="10,0,10.4,0"><Run FontSize="20" Text="Минуты                         "/> <Run FontSize="35" Text="{Binding Path=Minutes}"/><Run FontSize="35" Text=" мин."/></TextBlock>
-                    <TextBlock FontSize="20" Height="53" Margin="10,0,10.4,0"><Run FontSize="20" Text="СМС                              "/> <Run FontSize="35" Text="{Binding Path=SMS}"/><Run FontSize="35" Text=" смс"/></TextBlock>
+                    <StackPanel HorizontalAlignment="Center">
+                        <TextBlock FontSize="20" Height="56" Margin="10,0,10.4,0"><Run FontSize="20" Text="Интернет                       "/> <Run FontSize="35" Text="{Binding Path=GB}"/><Run FontSize="35" Text=" ГБ"/></TextBlock>
+                        <TextBlock FontSize="20" Height="56" Margin="10,0,10.4,0"><Run FontSize="20" Text="Минуты                         "/> <Run FontSize="35" Text="{Binding Path=Minutes}"/><Run FontSize="35" Text=" мин."/></TextBlock>
+                        <TextBlock FontSize="20" Height="53" Margin="10,0,10.4,0"><Run FontSize="20" Text="СМС                              "/> <Run FontSize="35" Text="{Binding Path=SMS}"/><Run FontSize="35" Text=" смс"/></TextBlock>
+                    </StackPanel>
                 </StackPanel>
             </Border>
         </Grid>
-
-        <TextBlock HorizontalAlignment="Left" Foreground="White" FontWeight="Bold" Background="#A52A2A" TextWrapping="Wrap" Text="Мобильный оператор" VerticalAlignment="Top" Height="58" Width="901" TextAlignment="Center" FontSize="40" RenderTransformOrigin="0.5,0.5" Margin="0,0,-1,0"></TextBlock>
-
     </Grid>
 </Window>

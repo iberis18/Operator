@@ -1,0 +1,61 @@
+﻿<Window x:Class="MobileOperator.AdminServicesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="'http://materialdesignxaml.net/winfx/xaml/themes"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:ii="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ie="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:y="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:MobileOperator"
+        mc:Ignorable="d"
+        Title="Мобильный оператор" Height="733.2" Width="900">
+    <Grid Background="#FFF8DC"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <TextBlock HorizontalAlignment="Stretch" Foreground="White" FontWeight="Bold" Background="#A52A2A" Text="Услуги" VerticalAlignment="Top" Height="58" TextAlignment="Center" FontSize="40" >
+        </TextBlock>
+        <Grid Margin=" 0, 59, 0, 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button Command="{Binding OpenAdminMainWindow}" Content="Клиенты" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="0"/>
+            <Button Command="{Binding OpenAdminRatesWindow}" Content="Тaрифы" FontSize="20" Background="#FFF8DC" Foreground="Black"  HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="1"/>
+            <Button Content="Услуги" FontSize="20" Background="White" Foreground="#A52A2A" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="2"/>
+            <Button Command="{Binding OpenAdminDetailWindow}" Content="Отчет" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="3"/>
+            <Button Command="{Binding OpenAdminDetailWindow2}" Content="Отчет 2" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="4"/>
+        </Grid>
+
+        <Grid>
+            <TextBlock TextAlignment="Center" Margin="0,100,0,281.2" ><Run FontSize="30" Text="Услуги: "/></TextBlock>
+            <TextBlock TextAlignment="Center" Margin="0,140,0,253.2" ><Run FontSize="15" Text="Нажмите для просмотра подробной информации" /></TextBlock>
+            <Button Command="{Binding AddServiceCommand}" Margin="0 120 20 0" Content="Добавить услугу" Background="#A52A2A" Foreground="White" FontSize="16" Height="35" VerticalAlignment="top" HorizontalAlignment="Right"/>
+        </Grid>
+        <DataGrid x:Name="ServicesDataGrid" FontSize="18" CanUserAddRows="False" 
+                  ItemsSource="{Binding Services}"  SelectedItem="{Binding SelectedService}"
+                  AutoGenerateColumns="False" ColumnWidth="*"
+                  HorizontalAlignment="Stretch" Margin="20,170,20,10" VerticalAlignment="Top">
+            <DataGrid.Columns>
+                <DataGridTextColumn Foreground="#A52A2A" Header="Название" Binding="{Binding Name}" IsReadOnly="True" Width="1*" />
+                <DataGridTextColumn Header="Условия" Binding="{Binding Conditions}" IsReadOnly="True" Width="3*" />
+                <DataGridTextColumn Header="Списание (руб)" Binding="{Binding Cost}" IsReadOnly="True" Width="1*"/>
+                <DataGridTextColumn Header="Подулючение (руб)" Binding="{Binding ConnectionCost}" IsReadOnly="True" Width="1*"/>
+            </DataGrid.Columns>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonUp">
+                    <i:InvokeCommandAction
+                        Command="{Binding ViewServiceCommand}"
+                        CommandParameter="{Binding SelectedItem, ElementName=ServicesDataGrid}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </DataGrid>
+        <!--<DataGrid x:Name="RatesDataGrid" HorizontalAlignment="Left" Height="202" Margin="107,467,0,0" VerticalAlignment="Top" Width="694" SelectionChanged="DataGrid_SelectionChanged"/>-->
+
+
+    </Grid>
+</Window>
+
+

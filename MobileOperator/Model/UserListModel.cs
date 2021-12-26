@@ -6,30 +6,21 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using DAL;
+using System.Windows;
 
 namespace MobileOperator.Model
 {
     class UserListModel : INotifyPropertyChanged
     {
-        //private List<UserModel> allUsers;
-        //private List<FLModel> allFLs;
-        //private List<ULModel> allULs;
         private List<ClientModel> allClients;
         private List<AdminModel> allAdmins;
         private DAL.MobileOperator db = new DAL.MobileOperator();
         public UserListModel()
         {
-            //allUsers = db.User.ToList().Select(i => new UserModel(i)).ToList();
+            checkDB(db);
             allAdmins = db.Admin.ToList().Select(i => new AdminModel(i, i.User)).ToList();
             allClients = db.Client.ToList().Select(i => new ClientModel(i.User, i)).ToList();
-            //allFLs = db.FL.ToList().Select(i => new FLModel(i.Client.User, i.Client, i)).ToList();
-            //allULs = db.UL.ToList().Select(i => new ULModel(i.Client.User, i.Client, i)).ToList();
         }
-
-        //public List<UserModel> AllUsers
-        //{
-        //    get { return allUsers; }
-        //}
         public List<ClientModel> AllClients
         {
             get { return allClients; }
@@ -38,14 +29,27 @@ namespace MobileOperator.Model
         {
             get { return allAdmins; }
         }
-        //public List<FLModel> AllFLs
-        //{
-        //    get { return allFLs; }
-        //}
-        //public List<ULModel> AllULs
-        //{
-        //    get { return allULs; }
-        //}
+
+        private void DBException()
+        {
+            MessageBox.Show("Ошибка подключения к базе, приложение будет закрыто", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+            Environment.Exit(0);
+        }
+
+        private void checkDB(DAL.MobileOperator db)
+        {
+            try
+            {
+                if (!db.Database.Exists())
+                {
+                    DBException();
+                }
+            }
+            catch (System.InvalidOperationException)
+            {
+                DBException();
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(string prop = "")

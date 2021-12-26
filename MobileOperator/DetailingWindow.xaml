@@ -16,11 +16,13 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Button Command="{Binding OpenMainWindow}" Content="Мой кабинет" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="0"/>
             <Button Command="{Binding OpenServices}" Content="Услуги" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="1"/>
             <Button Command="{Binding OpenRates}" Content="Тарифы" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="2"/>
-            <Button Content="Детализация" FontSize="20" Background="White" Foreground="#A52A2A" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="3"/>
+            <Button Content="Отчет" FontSize="20" Background="White" Foreground="#A52A2A" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="3"/>
+            <Button Command="{Binding OpenDetailing2}" Content="Отчет 2" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="4"/>
         </Grid>
 
         <Grid Margin="10,120,10,20">
@@ -28,6 +30,7 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="38"/>
             </Grid.RowDefinitions>
             <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Top" TextAlignment="Center" FontSize="30" Text="Получите распечатку звонков за выбраный период" Grid.Row="0"/>
             <Border Padding="20" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" CornerRadius="20" Grid.Row="1">
@@ -41,27 +44,36 @@
                             <ColumnDefinition Width="1.2*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Top" TextAlignment="Right" FontSize="20" Text="Укажите период:    c   " Grid.Column="0"/>
-                        <DatePicker Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="150"/>
+                        <DatePicker SelectedDate="{Binding Path=From}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="150"/>
                         <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Top" TextAlignment="Center" FontSize="20" Text="по" Grid.Column="2"/>
-                        <DatePicker Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Top" Width="150"/>
-                        <Button Command="{Binding DetailingCommand}" Foreground="White" Background="#A52A2A" FontSize="15" Height="34" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Cформировать выписку" Grid.Column="4"/>
+                        <DatePicker SelectedDate="{Binding Path=Till}" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Top" Width="150"/>
+                        <Button Command="{Binding GetDetailingCommand}" Foreground="White" Background="#A52A2A" FontSize="15" Height="34" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Cформировать выписку" Grid.Column="4"/>
                     </Grid>
                 </StackPanel>
             </Border>
 
 
             <DataGrid x:Name="DetailingDataGrid" FontSize="18" CanUserAddRows="False" Margin="0 20 0 0"
-                              ItemsSource="{Binding Rates}"  SelectedItem="{Binding SelectedRate}"
+                              ItemsSource="{Binding Calls}"
                               AutoGenerateColumns="False" ColumnWidth="*" Grid.Row="2"
                               HorizontalAlignment="Stretch" VerticalAlignment="Top">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Foreground="#A52A2A" Header="Название" Binding="{Binding Name}" IsReadOnly="True" />
-                    <DataGridTextColumn Header="Кол-во минут" Binding="{Binding Minutes}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Кол-во ГБ" Binding="{Binding GB}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Кол-во СМС" Binding="{Binding SMS}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Стоимость (руб)" Binding="{Binding Cost}" IsReadOnly="True"/>
+                    <DataGridTextColumn Foreground="#A52A2A" Header="Собеседник" Binding="{Binding Number}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Тип соединения" Binding="{Binding TypeName}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Направление" Binding="{Binding Direction}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Списание (руб)" Binding="{Binding Cost}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Время" Binding="{Binding TimeToString, StringFormat=G}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Продолжительность" Binding="{Binding Duration}" IsReadOnly="True"/>
                 </DataGrid.Columns>
             </DataGrid>
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Button Command="{Binding PrintToExelDetailingCommand}" Foreground="White" Background="#A52A2A" FontSize="15" Height="34" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Скачать выписку в xlsx" Grid.Column="0" />
+                <Button Command="{Binding PrintToWordDetailingCommand}" Foreground="White" Background="#A52A2A" FontSize="15" Height="34" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Скачать выписку в doc" Grid.Column="1" />
+            </Grid>
         </Grid>
     </Grid>
 </Window>

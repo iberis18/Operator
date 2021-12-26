@@ -10,21 +10,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MobileOperator.ViewModel;
 
 namespace MobileOperator
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для ViewClientWindow.xaml
     /// </summary>
-    public partial class ViewRateWindow : Window
+    public partial class ViewClientWindow : Window
     {
-        public ViewRateWindow(int userId, int rateId)
+        public ViewClientWindow(int clientId, int clientStatus)
         {
             InitializeComponent();
-            DataContext = new ViewRateWindowViewModel(userId, rateId);
+            DataContext = new ViewClientWindowViewModel(clientId, clientStatus, this);
+        }
+        public ViewClientWindow()
+        {
+            InitializeComponent();
+            DataContext = new ViewClientWindowViewModel(this);
         }
     }
 }

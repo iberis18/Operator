@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using DAL;
+using System.Windows;
 
 namespace MobileOperator.Model
 {
@@ -16,15 +17,16 @@ namespace MobileOperator.Model
 
         public ServiceModel(Service s)
         {
+            checkDB(db);
             service = s;
         }
         public ServiceModel(int id)
         {
-            DAL.MobileOperator db = new DAL.MobileOperator();
+            checkDB(db);
             service = db.Service.Find(id);
         }
 
-        public ServiceModel() { }
+        public ServiceModel() { checkDB(db); }
 
         public int Id
         {
@@ -39,12 +41,12 @@ namespace MobileOperator.Model
 
         public decimal Cost
         {
-            get { return (decimal)service.cost; }
+            get { if (service.cost != null) return (decimal)service.cost; else return 0; }
             set { service.cost = value; }
         }
         public decimal ConnectionCost
         {
-            get { return (decimal)service.connectionCost; }
+            get { if (service.connectionCost != null) return (decimal)service.connectionCost; else return 0; }
             set { service.connectionCost = value; }
         }
 
@@ -71,6 +73,68 @@ namespace MobileOperator.Model
             if (db.SaveChanges() != 0)
                 return true;
             else return false;
+        }
+
+        public bool Save()
+        {
+            Service s = db.Service.Find(Id);
+            if (s != null)
+            {
+                s.conditions = this.Conditions;
+                s.connectionCost = this.ConnectionCost;
+                s.cost = this.Cost;
+                s.name = this.Name;
+            }
+            else
+            {
+                s = new Service()
+                {
+                    conditions = this.Conditions,
+                    connectionCost = this.ConnectionCost,
+                    cost = this.Cost,
+                    name = this.Name
+                };
+                db.Service.Add(s);
+            }
+            if (db.SaveChanges() != 0)
+                return true;
+            else return false;
+        }
+
+        public bool Remove()
+        {
+            Service s = db.Service.Find(Id);
+            db.Service.Remove(s);
+
+            List<ServiceHistory> serviceHistory;
+            serviceHistory = db.ServiceHistory.Where(i => i.serviceId == s.id).ToList();
+            foreach (ServiceHistory service in serviceHistory)
+                db.ServiceHistory.Remove(service);
+
+            if (db.SaveChanges() != 0)
+                return true;
+            else return false;
+        }
+
+        private void DBException()
+        {
+            MessageBox.Show("Ошибка подключения к базе, приложение будет закрыто", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+            Environment.Exit(0);
+        }
+
+        private void checkDB(DAL.MobileOperator db)
+        {
+            try
+            {
+                if (!db.Database.Exists())
+                {
+                    DBException();
+                }
+            }
+            catch (System.InvalidOperationException)
+            {
+                DBException();
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

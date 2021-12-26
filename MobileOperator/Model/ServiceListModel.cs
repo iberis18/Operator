@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using DAL;
+using System.Windows;
 
 namespace MobileOperator.Model
 {
@@ -16,6 +17,7 @@ namespace MobileOperator.Model
         private DAL.MobileOperator db = new DAL.MobileOperator();
         public ServiceListModel()
         {
+            checkDB(db);
             allServices = db.Service.ToList().Select(i => new ServiceModel(i)).ToList();
         }
 
@@ -31,6 +33,26 @@ namespace MobileOperator.Model
             foreach (ServiceHistory service in clientServices)
                 clientServicesId.Add(service.serviceId);
             return clientServicesId;
+        }
+        private void DBException()
+        {
+            MessageBox.Show("Ошибка подключения к базе, приложение будет закрыто", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+            Environment.Exit(0);
+        }
+
+        private void checkDB(DAL.MobileOperator db)
+        {
+            try
+            {
+                if (!db.Database.Exists())
+                {
+                    DBException();
+                }
+            }
+            catch (System.InvalidOperationException)
+            {
+                DBException();
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using DAL;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
+using System.Windows;
 
 namespace MobileOperator.Model
 {
@@ -15,22 +16,24 @@ namespace MobileOperator.Model
     {
         protected User user = new User();
         private int status;
+        protected DAL.MobileOperator db = new DAL.MobileOperator();
 
-        public UserModel() { }
+        public UserModel() { checkDB(db); }
         public UserModel(User u)
         {
+            checkDB(db);
             user = u;
             status = CheckStatus();
         }
         public UserModel(int id)
         {
-            DAL.MobileOperator db = new DAL.MobileOperator();
+            checkDB(db);
             user = db.User
                 .Where(i => i.id == id).FirstOrDefault();
             status = CheckStatus();
         }
 
-        private int CheckStatus ()
+        private int CheckStatus()
         {
             if (user.Admin != null)
                 return 1;
@@ -58,18 +61,32 @@ namespace MobileOperator.Model
         }
 
         public virtual string Number { get; set; }
-        //public virtual int Minutes { get; set; }
-        //public virtual int SMS { get; set; }
-        //public virtual int GB { get; set; }
-        //public virtual int Rate { get; set; }
-        //public virtual decimal Balance { get; set; }
-        //public virtual string FIO { get; set; }
-        //public virtual string PasportDetales { get; set; }
-        //public virtual string OrganizationName { get; set; }
-        //public virtual string Address { get; set; }
-        //public virtual void RateHistory() { }
 
-        virtual public bool Save() { return true; }
+        virtual public bool Save() { return false; }
+        virtual public bool Remove()
+        {
+            return false;
+        }
+        private void DBException()
+        {
+            MessageBox.Show("Ошибка подключения к базе, приложение будет закрыто", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+            Environment.Exit(0);
+        }
+
+        private void checkDB(DAL.MobileOperator db)
+        {
+            try
+            {
+                if (!db.Database.Exists())
+                {
+                    DBException();
+                }
+            }
+            catch (System.InvalidOperationException)
+            {
+                DBException();
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

@@ -53,6 +53,14 @@
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Word.15.0.4797.1003\lib\net20\Microsoft.Office.Interop.Word.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -84,28 +92,79 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdminDetailingWindow.xaml.cs">
+      <DependentUpon>AdminDetailingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDetailingWindow2.xaml.cs">
+      <DependentUpon>AdminDetailingWindow2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminMainWindow.xaml.cs">
+      <DependentUpon>AdminMainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRatesWindow.xaml.cs">
+      <DependentUpon>AdminRatesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminSelectedRateWindow.xaml.cs">
+      <DependentUpon>AdminSelectedRateWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminSelectedServiceWindow.xaml.cs">
+      <DependentUpon>AdminSelectedServiceWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminServicesWindow.xaml.cs">
+      <DependentUpon>AdminServicesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AskRateWindow.xaml.cs">
+      <DependentUpon>AskRateWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ChangeRateWindow.xaml.cs">
       <DependentUpon>ChangeRateWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DetailingWindow.xaml.cs">
       <DependentUpon>DetailingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DetailingWindow2.xaml.cs">
+      <DependentUpon>DetailingWindow2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FLRegistration.xaml.cs">
+      <DependentUpon>FLRegistration.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\AdminModel.cs" />
     <Compile Include="Model\ClientModel.cs" />
+    <Compile Include="Model\CallModel.cs" />
+    <Compile Include="Model\Detailing2Model.cs" />
+    <Compile Include="Model\DetailingModel.cs" />
     <Compile Include="Model\FLModel.cs" />
+    <Compile Include="Model\RateHistoryModel.cs" />
     <Compile Include="Model\RateListModel.cs" />
+    <Compile Include="Model\ServiceHistoryModel.cs" />
     <Compile Include="Model\ServiceListModel.cs" />
     <Compile Include="Model\ServiceModel.cs" />
     <Compile Include="Model\ULModel.cs" />
     <Compile Include="RatesWindow.xaml.cs">
       <DependentUpon>RatesWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SelectesRateWindow.xaml.cs">
+      <DependentUpon>SelectesRateWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ServicesWindow.xaml.cs">
       <DependentUpon>ServicesWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewClientWindow.xaml.cs">
+      <DependentUpon>ViewClientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\AdminDetailing2ViewModel.cs" />
+    <Compile Include="ViewModel\AdminDetailingWindowViewModel.cs" />
+    <Compile Include="ViewModel\AdminMainWindowViewModel.cs" />
+    <Compile Include="ViewModel\AdminRatesWindowViewModel.cs" />
+    <Compile Include="ViewModel\AdminSelectedRateWindowViewModel.cs" />
+    <Compile Include="ViewModel\AdminSelectedServiceWindowViewModel.cs" />
+    <Compile Include="ViewModel\AdminServicesWindowViewModel.cs" />
+    <Compile Include="ViewModel\AskRateWindowViewModel.cs" />
     <Compile Include="ViewModel\ChangeRateWindowViewModel.cs" />
+    <Compile Include="Model\ClientListModel.cs" />
+    <Compile Include="ViewModel\ClientViewModel.cs" />
+    <Compile Include="ViewModel\DetailingWindow2ViewModel.cs" />
     <Compile Include="ViewModel\DetailingWindowViewModel.cs" />
-    <Compile Include="ViewModel\IRequireViewIdentification.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -120,16 +179,53 @@
     <Compile Include="Model\UserListModel.cs" />
     <Compile Include="ViewModel\ServicesWindowViewModel.cs" />
     <Compile Include="ViewModel\ServiceViewModel.cs" />
+    <Compile Include="ViewModel\ViewClientWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewRateWindowViewModel.cs" />
-    <Compile Include="ViewModel\WindowManager.cs" />
-    <Compile Include="ViewRateWindow.xaml.cs">
-      <DependentUpon>ViewRateWindow.xaml</DependentUpon>
-    </Compile>
+    <Page Include="AdminDetailingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminDetailingWindow2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminMainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminRatesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminSelectedRateWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminSelectedServiceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminServicesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AskRateWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ChangeRateWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DetailingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DetailingWindow2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FLRegistration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -153,11 +249,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SelectesRateWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ServicesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ViewRateWindow.xaml">
+    <Page Include="ViewClientWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -32,8 +32,16 @@ namespace DAL
                 .IsUnicode(false);
 
             modelBuilder.Entity<Call>()
+                .Property(e => e.callerNumber)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Call>()
                 .Property(e => e.calledNumber)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Call>()
+                .Property(e => e.cost)
+                .HasPrecision(18, 0);
 
             modelBuilder.Entity<Client>()
                 .Property(e => e.number)

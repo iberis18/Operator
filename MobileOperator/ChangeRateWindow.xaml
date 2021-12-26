@@ -11,7 +11,7 @@
         xmlns:local="clr-namespace:MobileOperator"
         mc:Ignorable="d"
         Title="Мобильный оператор" Height="700" Width="900">
-    <Grid Background="#FFF8DC" Margin="0,0,-6.4,-135.6" Height="700" VerticalAlignment="Top">
+    <Grid Background="#FFF8DC" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
 
         <TextBlock HorizontalAlignment="Stretch" Foreground="White" FontWeight="Bold" Background="#A52A2A" Text="Смена тарифа" VerticalAlignment="Top" Height="58" TextAlignment="Center" FontSize="40" />
         <Grid Margin=" 0, 59, 0, 0">
@@ -20,16 +20,18 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Button Command="{Binding OpenMainWindow}" Content="Мой кабинет" FontSize="20" HorizontalAlignment="Stretch" Background="#FFF8DC" Foreground="Black" VerticalAlignment="Top" Height="40" Grid.Column="0"/>
             <Button Command="{Binding OpenServices}" Content="Услуги" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="1"/>
             <Button Command="{Binding OpenRates}" Content="Тарифы"  FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="2"/>
-            <Button Command="{Binding OpenDetailing}" Content="Детализация" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="3"/>
+            <Button Command="{Binding OpenDetailing}" Content="Отчет" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="3"/>
+            <Button Command="{Binding OpenDetailing2}" Content="Отчет 2" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="4"/>
         </Grid>
         <TextBlock HorizontalAlignment="Stretch" TextAlignment="Center" Margin="0,100,0,0" FontSize="30" FontWeight="Bold" Height="50" VerticalAlignment="Top">Список тарифов:</TextBlock>
 
         <Border Margin="20,150,20,20" Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" CornerRadius="20">
-            <ListBox  x:Name="ListRates" ItemsSource="{Binding Rates}">
+            <ListBox  x:Name="ListRates" ItemsSource="{Binding Rates}" HorizontalContentAlignment="Stretch">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel  Margin="10">

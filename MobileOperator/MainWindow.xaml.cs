@@ -24,11 +24,12 @@ namespace MobileOperator
         public MainWindow()
         {
             InitializeComponent();
+            this.Close();
         }
         public MainWindow(int userId, int status)
         {
             InitializeComponent();
-            DataContext = new AppViewModel(userId, status);
+            DataContext = new AppViewModel(userId, status, this);
         }
     }
 }

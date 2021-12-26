@@ -1,0 +1,34 @@
+﻿<Window x:Class="MobileOperator.AskRateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:xx="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="'http://materialdesignxaml.net/winfx/xaml/themes"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:ii="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ie="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:y="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:MobileOperator"
+        mc:Ignorable="d"
+        Title="Мобильный оператор" Height="300" Width="500">
+
+    <Grid Background="#FFF8DC" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <TextBlock HorizontalAlignment="Stretch" Foreground="White" FontWeight="Bold" Padding="12" Background="#A52A2A" Text="На какой тариф переключить всех клиентов?" VerticalAlignment="Top" Height="58" TextAlignment="Center" FontSize="20" />
+
+        <Border Background="White" Padding="20 20 20 20" CornerRadius="20" Margin="20,80,20,20" VerticalAlignment="Stretch">
+
+            <StackPanel>
+                <ComboBox FontSize="18" Height="36" Margin="50,0,50,0"
+                              ItemsSource="{Binding Rates}"
+                              DisplayMemberPath="Name"
+                              SelectedValue="{Binding Rate}" 
+                              SelectedValuePath="Id" />
+                <Button Command="{Binding UpdateRateCommand}" Margin="50 20 50 20" Foreground="White" Background="#A52A2A" FontSize="16" Height="36" HorizontalAlignment="Stretch" Content="Сохранить изменения" />
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</Window>
+
+

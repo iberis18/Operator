@@ -24,7 +24,7 @@ namespace MobileOperator
         public ChangeRateWindow(int userId)
         {
             InitializeComponent();
-            DataContext = new ChangeRateWindowViewModel(userId);
+            DataContext = new ChangeRateWindowViewModel(userId, this);
         }
     }
 }

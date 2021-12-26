@@ -16,13 +16,15 @@ namespace MobileOperator.ViewModel
         private int userId, status;
         private ServiceListModel services = new ServiceListModel();
         private ClientModel client;
+        private Window window;
         public ObservableCollection<ServiceViewModel> ConnectionServices { get; set; }
         public ObservableCollection<ServiceViewModel> AvailableServices { get; set; }
 
-        public ServicesWindowViewModel(int userId, int status)
+        public ServicesWindowViewModel(int userId, int status, Window window)
         {
             this.userId = userId;
             this.status = status;
+            this.window = window;
             ConnectionServices = new ObservableCollection<ServiceViewModel> { };
             AvailableServices = new ObservableCollection<ServiceViewModel> { };
             client = new ClientModel(userId);
@@ -60,7 +62,13 @@ namespace MobileOperator.ViewModel
                   (changeRateCommand = new RelayCommand(obj =>
                   {
                       ChangeRateWindow changeRate = new ChangeRateWindow(userId);
+                      changeRate.WindowState = window.WindowState;
+                      changeRate.Top = window.Top;
+                      changeRate.Left = window.Left;
+                      changeRate.Height = window.Height;
+                      changeRate.Width = window.Width;
                       changeRate.Show();
+                      window.Close();
                   }));
             }
         }
@@ -74,7 +82,13 @@ namespace MobileOperator.ViewModel
                   (openMainWindow = new RelayCommand(obj =>
                   {
                       MainWindow main = new MainWindow(userId, status);
+                      main.WindowState = window.WindowState;
+                      main.Top = window.Top;
+                      main.Left = window.Left;
+                      main.Height = window.Height;
+                      main.Width = window.Width;
                       main.Show();
+                      window.Close();
                   }));
             }
         }
@@ -87,7 +101,51 @@ namespace MobileOperator.ViewModel
                   (openRates = new RelayCommand(obj =>
                   {
                       RatesWindow rates = new RatesWindow(userId, status);
+                      rates.WindowState = window.WindowState;
+                      rates.Top = window.Top;
+                      rates.Left = window.Left;
+                      rates.Height = window.Height;
+                      rates.Width = window.Width;
                       rates.Show();
+                      window.Close();
+                  }));
+            }
+        }
+        private RelayCommand openDetailing;
+        public RelayCommand OpenDetailing
+        {
+            get
+            {
+                return openDetailing ??
+                  (openDetailing = new RelayCommand(obj =>
+                  {
+                      DetailingWindow detailing = new DetailingWindow(userId, status);
+                      detailing.WindowState = window.WindowState;
+                      detailing.Top = window.Top;
+                      detailing.Left = window.Left;
+                      detailing.Height = window.Height;
+                      detailing.Width = window.Width;
+                      detailing.Show();
+                      window.Close();
+                  }));
+            }
+        }
+        private RelayCommand openDetailing2;
+        public RelayCommand OpenDetailing2
+        {
+            get
+            {
+                return openDetailing2 ??
+                  (openDetailing2 = new RelayCommand(obj =>
+                  {
+                      DetailingWindow2 detailing = new DetailingWindow2(userId, status);
+                      detailing.WindowState = window.WindowState;
+                      detailing.Top = window.Top;
+                      detailing.Left = window.Left;
+                      detailing.Height = window.Height;
+                      detailing.Width = window.Width;
+                      detailing.Show();
+                      window.Close();
                   }));
             }
         }

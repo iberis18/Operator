@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using DAL;
+using System.Windows;
 
 namespace MobileOperator.Model
 {
@@ -13,9 +14,11 @@ namespace MobileOperator.Model
     {
         private List<RateModel> allCorporateRates;
         private List<RateModel> allNotCorporateRates;
+        private List<RateModel> allRates;
         private DAL.MobileOperator db = new DAL.MobileOperator();
         public RateListModel()
         {
+            checkDB(db);
             allCorporateRates = db.Rate
                 .Where(i => i.corporate == true)
                 .ToList()
@@ -26,8 +29,8 @@ namespace MobileOperator.Model
                 .ToList()
                 .Select(i => new RateModel(i))
                 .ToList();
+            allRates = db.Rate.ToList().Select(i => new RateModel(i)).ToList();
         }
-
         public List<RateModel> AllCorporateRates
         {
             get { return allCorporateRates; }
@@ -36,7 +39,29 @@ namespace MobileOperator.Model
         {
             get { return allNotCorporateRates; }
         }
-
+        public List<RateModel> AllRates
+        {
+            get { return allRates; }
+        }
+        private void DBException()
+        {
+            MessageBox.Show("Ошибка подключения к базе, приложение будет закрыто", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+            Environment.Exit(0);
+        }
+        private void checkDB(DAL.MobileOperator db)
+        {
+            try
+            {
+                if (!db.Database.Exists())
+                {
+                    DBException();
+                }
+            }
+            catch (System.InvalidOperationException)
+            {
+                DBException();
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(string prop = "")
         {

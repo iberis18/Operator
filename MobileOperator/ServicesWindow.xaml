@@ -20,11 +20,13 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Button Command="{Binding OpenMainWindow}" Content="Мой кабинет" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="0"/>
             <Button Content="Услуги" FontSize="20" Background="White" Foreground="#A52A2A" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="1"/>
             <Button Command="{Binding OpenRates}" Content="Тарифы" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="2"/>
-            <Button Command="{Binding OpenDetailing}" Content="Детализация" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="3"/>
+            <Button Command="{Binding OpenDetailing}" Content="Отчет" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="3"/>
+            <Button Command="{Binding OpenDetailing2}" Content="Отчет 2" FontSize="20" Background="#FFF8DC" Foreground="Black" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" Grid.Column="4"/>
         </Grid>
 
         <Grid Margin="10,120,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -35,7 +37,7 @@
 
             <TextBlock TextAlignment="Center" FontSize="30" Text="Подключенные услуги: " Grid.Row="0"/>
             <Border Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0, 50, 0, 0" Padding="20" CornerRadius="20">
-                <ListBox ItemsSource="{Binding ConnectionServices}" VerticalAlignment="Top" HorizontalAlignment="Stretch" Grid.Row="0">
+                <ListBox ItemsSource="{Binding ConnectionServices}" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" Grid.Row="0">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0,10,0,0">
@@ -64,7 +66,7 @@
 
             <TextBlock TextAlignment="Center" FontSize="30" Text="Доступные для подключения услуги: " Grid.Row="1"/>
             <Border Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0, 50, 0, 20" Padding="20" CornerRadius="20" Grid.Row="1">
-                <ListBox ItemsSource="{Binding AvailableServices}" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                <ListBox ItemsSource="{Binding AvailableServices}" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" >
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel HorizontalAlignment="Stretch" Margin="0,10,0,0">

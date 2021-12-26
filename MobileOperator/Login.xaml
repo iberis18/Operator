@@ -19,8 +19,8 @@ Title="Авторизация" Height="400" Width="700">
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="4*"/>
                     </Grid.ColumnDefinitions>
-                    <Button FontSize="16" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=passwordBox}" HorizontalAlignment="Right" Content="Войти" Foreground="White" Background="#A52A2A" Width="141" Height="36" Margin="0,133,0.4,-140" VerticalAlignment="Top" Grid.Column="1"  />
-                    <Button FontSize="16" Command="{Binding RegistratedCommand}" HorizontalAlignment="Left" Content="Регистрация" Background="White" Foreground="#A52A2A" Width="141" Height="36" Margin="0,133,0,-140"  />
+                    <Button FontSize="16" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=passwordBox}" HorizontalAlignment="Stretch" Content="Войти" Foreground="White" Background="#A52A2A" Height="36" Margin="0,133,0.4,-140" VerticalAlignment="Top" Grid.ColumnSpan="2"  />
+                    <!--<Button FontSize="16" Command="{Binding RegistratedCommand}" HorizontalAlignment="Left" Content="Регистрация" Background="White" Foreground="#A52A2A" Width="141" Height="36" Margin="0,133,0,-140"  />-->
                     <TextBlock FontSize="16" Text="Номер телефона или логин:" Margin="0,0,0.4,-14"/>
                     <TextBox  Text="{Binding Username}" Margin="9.6,0,0.4,0" Grid.Column="1"/>
                     <TextBlock FontSize="16" Text="Пароль:" Margin="142,43,0.4,-43"/>

@@ -15,6 +15,7 @@ namespace MobileOperator.ViewModel
     class LoginWindowViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        private Window window;
 
         private void NotifyPropertyChanged(string propertyName)
         {
@@ -45,10 +46,11 @@ namespace MobileOperator.ViewModel
 
         UserListModel allUsers;
         public ObservableCollection<LoginModel> Users { get; set; }
-        public LoginWindowViewModel()
+        public LoginWindowViewModel(Window window)
         {
             Users = new ObservableCollection<LoginModel> { };
             allUsers = new UserListModel();
+            this.window = window;
         }
 
         //89203695412 — 111
@@ -89,8 +91,17 @@ namespace MobileOperator.ViewModel
                       var u = Users.Where(i => i.Login == username && i.Password == clearTextPassword).FirstOrDefault();
                       if (u != null)
                       {
-                          MainWindow main = new MainWindow(u.Id, u.Status);
-                          main.Show();
+                          if (u.Status == 1)
+                          {
+                              AdminMainWindow main = new AdminMainWindow();
+                              main.Show();
+                          }
+                          else
+                          {
+                              MainWindow main = new MainWindow(u.Id, u.Status);
+                              main.Show();
+                          }
+                          window.Close();
                       }
                       else MessageBox.Show("Неверный логин или пароль!");
                   }));

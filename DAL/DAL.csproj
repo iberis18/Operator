@@ -52,7 +52,6 @@
   <ItemGroup>
     <Compile Include="Admin.cs" />
     <Compile Include="Call.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="FL.cs" />
     <Compile Include="MobileOperator.cs" />

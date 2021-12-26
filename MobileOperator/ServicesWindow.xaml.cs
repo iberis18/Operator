@@ -23,7 +23,7 @@ namespace MobileOperator
         public ServicesWindow(int userId, int status)
         {
             InitializeComponent();
-            DataContext = new ServicesWindowViewModel(userId, status);
+            DataContext = new ServicesWindowViewModel(userId, status, this);
         }
     }
 }
