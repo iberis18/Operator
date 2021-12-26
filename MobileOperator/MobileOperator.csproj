@@ -125,9 +125,6 @@
     <Compile Include="DetailingWindow2.xaml.cs">
       <DependentUpon>DetailingWindow2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FLRegistration.xaml.cs">
-      <DependentUpon>FLRegistration.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Model\AdminModel.cs" />
     <Compile Include="Model\ClientModel.cs" />
     <Compile Include="Model\CallModel.cs" />
@@ -222,10 +219,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DetailingWindow2.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="FLRegistration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
